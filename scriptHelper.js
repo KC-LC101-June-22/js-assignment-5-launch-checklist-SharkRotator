@@ -16,12 +16,45 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
    */
 }
 
-function validateInput(testInput) {
-   
+function validateInput(input) {
+   if (input === ""){
+    return ("Empty")
+   }
+   if (isNaN(input)){
+    return "Not a Number"
+   } else {
+    return "Is a Number"
+   }
 }
 
 function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   
+    let errorMessages = ["User Input Required!", "Not a number", "Invalid name"];
+
+    if (!pilot || !copilot || !fuelLevel|| !cargoLevel){
+        alert(errorMessages[0])
+    }
+
+    if ( isNan(fuelLevel) || isNaN(cargoLevel)){
+        alert(errorMessages[1])
+    }
+
+    let pilotListValue = `${pilot} is Ready!`
+    
+    let fuelLevelMessage;
+    if (Number(fuelLevel) < 10000){
+        fuelLevelMessage = "Wahetver means its not good"
+    } else {
+        fuelLevelMessage = "Is Good."  
+    }
+
+    list.innerHtml = `
+    <ol>
+        <li id="pilotStatus" data-testid="pilotStatus">${pilot} Ready</li>
+        <li id="copilotStatus" data-testid="copilotStatus">Co-pilot Ready</li>
+        <li id="fuelStatus" data-testid="fuelStatus">Fuel level high enough for launch</li>
+        <li id="cargoStatus" data-testid="cargoStatus">Cargo mass low enough for launch</li>
+    </ol>`;
+
 }
 
 async function myFetch() {
