@@ -66,7 +66,7 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     if(validateInput(cargoLevel) ==="Not a Number" || validateInput(fuelLevel)==="Not a Number"){
         alert("Cargo level and/or Fuel Level need to be a number");
         return
-     }else if(!pilot && !copilot && !fuelLevel && !cargoLevel){
+     }else if(!pilot || !copilot || !fuelLevel || !cargoLevel){
         alert("All input required!");
         return
      }
