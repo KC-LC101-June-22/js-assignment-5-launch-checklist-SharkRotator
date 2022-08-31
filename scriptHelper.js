@@ -36,7 +36,12 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     
     
     // 1st option cargo lvl is too high, 2nd option fuel lvl is too low, 3rd option neither level is acceptable
-    let printOuts= [
+    let printOuts= [`<ol>
+        <li id="pilotStatus" data-testid="pilotStatus">${pilotMessages[0]}</li>
+        <li id="copilotStatus" data-testid="copilotStatus">${pilotMessages[1]}</li>
+        <li id="fuelStatus" data-testid="fuelStatus">${fuelLevelMessage[1]}</li>
+        <li id="cargoStatus" data-testid="cargoStatus">${cargoLevelMessage[0]}</li>
+    </ol>`,
     `
     <ol>
         <li id="pilotStatus" data-testid="pilotStatus">${pilotMessages[0]}</li>
@@ -68,22 +73,23 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
 
     if(cargoLevel <10000 && fuelLevel >10000){
-        list.style.visibility = "collapse";
+        list.innerHTML = printOuts[0]
+        list.style.visibility = "visible";
         h2.style.color = "green";
         h2.innerHTML = "Shuttle Ready for Launch";
     }else if(cargoLevel>10000 && fuelLevel>10000){
-        list.innerHTML = printOuts[0];
+        list.innerHTML = printOuts[1];
         list.style.visibility = "visible"
         h2.style.color = "red";
         h2.innerHTML = "Shuttle not ready for launch";
         list.style.visibility = "visible"
     }else if(cargoLevel<10000 && fuelLevel<10000){
-        list.innerHTML = printOuts[1];
+        list.innerHTML = printOuts[2];
         list.style.visibility = "visible"
         h2.style.color = "red";
         h2.innerHTML = "Shuttle not ready for launch";   
     }else {
-        list.innerHTML = printOuts[2];
+        list.innerHTML = printOuts[3];
         list.style.visibility = "visible"
         h2.style.color = "red";
         h2.innerHTML = "Shuttle not ready for launch";
